@@ -1,0 +1,22 @@
+import baseUrl from "./baseurl"
+
+export default {
+    loginUser(obj){
+        return fetch(`${baseUrl}login/`, {
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(obj)
+        }).then(r=> r.json())
+    },
+    registerUser(obj){
+        return fetch(`${baseUrl}register/`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(obj)
+        }).then(r=>r.json())
+    }
+}

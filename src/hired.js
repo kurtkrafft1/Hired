@@ -9,7 +9,9 @@ const Hired = props => {
         <>
         {/* <Navbar /> */}
         {/* <Header /> */}
-        <ApplicationViews />
+        <div className="app_views">
+            <ApplicationViews />
+        </div>
         </>
     )
 }
