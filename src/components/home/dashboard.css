@@ -26,7 +26,9 @@ justify-content: space-evenly;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
-	transform: scale(1);
+    transform: scale(1);
+    display: flex;
+    justify-content: center;
 }
 .job-holder h1 {
     color: rgba(44, 95, 114);

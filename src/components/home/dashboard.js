@@ -10,6 +10,7 @@ const Dashboard = props => {
 
     const [customer, setCustomer] = useState({user: {first_name:"", last_name: ""}})
     const [employeeProfiles, setEmployeeProfiles] = useState([])
+    const [currentEmployee, setCurrentEmployee] = useState({})
     const [mostRecentJob, setMostRecentJob] = useState( {
         id: "",
         employee_profile: {
@@ -66,6 +67,10 @@ const Dashboard = props => {
                 setMostRecentJob(mostRecentJob)
             }else {
                 setMostRecentJob(arr[0])
+                console.log(arr[0])
+                const filtered = arr.filter(obj=> obj.start_date !== null && obj.end_date === null)
+                setCurrentEmployee(filtered[0])
+                console.log(filtered[0])
             }
             //tell the page "hey page we are done loading"
         }).then(()=> setIsLoading(false))
@@ -81,7 +86,10 @@ const Dashboard = props => {
         return (
             <>
             <div className="home" >
+            
             <div className="alert-holder">
+            <div className="job-holder">{currentEmployee.end_date=== null && currentEmployee.start_date !== null ? (<h1>{currentEmployee.employee_profile.customer.user.first_name} {currentEmployee.employee_profile.customer.user.last_name[0]}. is currently helping you out!</h1>) :
+            (<h1 className="center-text">No current employees</h1>)}</div>
                 <div className="message-holder"><h1>(1) You have one new  message!</h1></div>
                 {/* This text below me is confusing so I am sorry dear code reader. Essentially, I am checking to see if the mostRecent Job has a review and if the end date isnt
                 null. If those are true it means the user has had a recent job and hasn't left a review so we will give them the option to do that. Then we check to see if the end date is equal
