@@ -4,6 +4,9 @@ import Dashboard from "./components/home/dashboard"
 import Login from "./components/login/login"
 import Register from "./components/login/Register"
 import UserProfiles from "./components/profiles/profiles"
+import ProfileForm from "./components/profiles/profileForm"
+import EditProfileForm from "./components/profiles/editProfileForm"
+import YourJobs from "./components/jobs/yourjobs"
 
 const ApplicationViews = props => {
 
@@ -50,6 +53,40 @@ const ApplicationViews = props => {
                     }
                 }}
                 />
+                <Route 
+                exact path = "/profiles/new"
+                render={props=> {
+                    if(hasUser){
+                        return <ProfileForm {...props} />
+                    }
+                    else {
+                        return <Redirect to="/login" />
+                    }
+                }}
+                />
+                <Route 
+                exact path = "/profiles/edit/:profileId(\d+)"
+                render={props=> {
+                    if(hasUser){
+                        return <EditProfileForm  profileId={parseInt(props.match.params.profileId)} {...props} />
+                    }
+                    else {
+                        return <Redirect to="/login" />
+                    }
+                }}
+                />
+                <Route 
+                exact path = "/jobs"
+                render={props=> {
+                    if(hasUser){
+                        return <YourJobs {...props} />
+                    }
+                    else {
+                        return <Redirect to="/login" />
+                    }
+                }}
+                />
+                
                 </div>
                 </>
             )

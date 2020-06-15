@@ -16,7 +16,7 @@ return (
         <div className="menu-header"><h1 className="menu-title">-Hired-</h1></div>
         <a id="home" className="menu-item" href="/">Home</a>
         <a id="about" className="menu-item" href="/profiles">Profiles</a>
-        <a id="contact" className="menu-item" href="/jobs">Past Jobs</a>
+        <a id="contact" className="menu-item" href="/jobs">Your Jobs</a>
         <a className="menu-item" href="/messages">Messages</a>
         <a className="menu-item" href="/account">Account</a>
         <a className="menu-item" href="/login" onClick={()=> props.clearUser()}>Logout</a>

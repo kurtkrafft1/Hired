@@ -1,8 +1,29 @@
 import React, {useState, useEffect} from 'react'
 import JM from "../../modules/jobsManager"
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import EPM from "../../modules/employeeProfileManager"
 
 const ProfileCard = props => {
     const [numJobs, setNumJobs] = useState(0)
+    const token = sessionStorage.getItem('token')
+
+    const confirmDelete= () => {
+        confirmAlert({
+            title: 'Really?',
+            message: 'Are you sure you want to delete this profile?',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => EPM.deleteProfile(token, props.up.id).then(()=> props.setReload(!props.reload))
+              },
+              {
+                label: 'No',
+                onClick: () => ""
+              }
+            ]
+          });
+    }
 
     useEffect(()=> {
         JM.getJobsByEmployeeProfile(props.up.id).then(arr=> {
@@ -14,26 +35,27 @@ const ProfileCard = props => {
     return (
         <>
        
-    <div class="card">
-    <div class="image">
+    <div className="card">
+    <div className="image">
       <img src="https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg" />
     </div>
-    <div class="content">
-      <div class="header">{props.up.title}</div>    
-      <div class="meta">
+    <div className="content">
+      <div className="header">{props.up.title}</div>    
+      <div className="meta">
         <a>Friends</a>
       </div>
-      <div class="description">
+      <div className="description">
         {props.up.description}
       </div>
     </div>
-    <div class="extra content split">
+    <div className="extra content split">
       <span>
-        <i class="check icon"></i>
+        <i className="check icon"></i>
         {numJobs} Jobs
       </span>
       <span className="edit-icon">
-        <i class="edit icon"></i>
+        <i className="edit icon" onClick={()=> props.history.push(`/profiles/edit/${props.up.id}`)}></i>
+        <i className="trash alternate icon" onClick={()=> confirmDelete()}></i>
       </span>
     </div>
     </div>
