@@ -1,0 +1,81 @@
+.home{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+}
+.alert-holder{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-evenly;
+}
+.message-holder{
+    background: white;
+   
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+	transform: scale(1);
+    animation: pulse 2s infinite;
+    width: 8    0%;
+}
+.job-holder{
+    background: white;
+    width: 80%;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+    transform: scale(1);
+    display: flex;
+    justify-content: center;
+}
+.job-holder h1 {
+    color: rgba(44, 95, 114);
+}
+.message-holder h1{
+    color: rgba(44, 95, 114);}
+
+    @keyframes pulse {
+        0% {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+        }
+    
+        70% {
+            transform: scale(1);
+            box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+        }
+    
+        100% {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        }
+    }
+.profile-holder{
+    display: flex;
+    flex-direction: column;
+    background:  white;
+    padding: 40px;
+    border-radius: 10px;
+    width: 60%;
+    height: 90%;
+    margin-top: 20px;
+}
+.name-n-img{
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    color: rgba(44, 95, 114);
+    margin-bottom: 50px;
+}
+.profile-header{
+    align-self: center;
+    color: rgba(44, 95, 114);
+}
+.job-list-holder{
+    color: rgba(44, 95, 114);
+}
+.prof-pic-icon{
+    max-width: 300px;
+}

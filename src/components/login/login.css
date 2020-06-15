@@ -1,17 +1,4 @@
-html {
-    height: 100%;
-  }
-  body {
-    margin:0;
-    padding:0;
-    font-family: sans-serif;
-    background: linear-gradient(#84DCC6,  #4B4E6D);
-  }
-  /* options for background: */
-  /* background: linear-gradient(rgb(248, 209, 93), #DE9E36); */
-  /* background: linear-gradient(#FFC2B4, #FB8F67); */
-  /* background: linear-gradient(#6A2E35, #2E2836); */
-  /* background: linear-gradient(#FFA3A5,  #FFBF81); */
+
   
   .login-box {
     position: absolute;

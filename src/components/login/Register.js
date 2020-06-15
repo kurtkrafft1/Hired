@@ -23,6 +23,7 @@ const Register = props => {
             if(obj.valid===true){
                 sessionStorage.setItem('token', obj.token)
                 sessionStorage.setItem('user_id', obj.user_id)
+                props.setHasUser(true)
                 props.history.push("/")
             }else {
                 setShowMessage(true)
