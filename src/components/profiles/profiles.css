@@ -5,6 +5,11 @@
     -webkit-background-clip: text;
        -moz-background-clip: text;
             background-clip: text;
+    
+}
+.profiles-header{
+    display: flex;
+    justify-content: space-between;
 }
 .split{
     display: flex !important;
@@ -12,8 +17,54 @@
 }
 .edit-icon{
     margin-left: 190px;
+    display: flex;
+    padding-top: 10px;
 }
-.edit-icon:hover{
+.edit:hover{
     opacity: 0.5;
     cursor: pointer;
+}
+.trash:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+.plus {
+    background-color: #565656;
+    color: transparent;
+    text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
+}
+.plus:hover{
+    background-color: #302f2f;
+    color: transparent;
+    cursor: pointer;
+}
+.card:hover{
+    cursor: default !important;
+}
+.react-confirm-alert-body{
+    animation: pulse 3s infinite;
+}
+.react-confirm-alert-body button{
+    background:   #4BA3C3 !important;
+    
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(75, 163, 195, 0.267);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 4px grey;
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgb(116, 179, 202);
+    }
 }

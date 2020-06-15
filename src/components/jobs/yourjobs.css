@@ -1,0 +1,23 @@
+/* .add-shadow{
+    background: linear-gradient(rgba(128, 128, 128, 0.178), rgba(231, 230, 230, 0.726)) !important;
+} */
+.outlined{
+    border: 1px solid rgba(97, 96, 96, 0.205);
+    /* border-bottom: 1px solid rgba(97, 96, 96, 0.205); */
+    border-radius: 5px;
+    animation: embold 2s infinite linear ;
+}
+
+
+@keyframes embold{
+    0%{
+        
+        background: linear-gradient(rgba(224, 224, 224, 0.479), rgba(187, 185, 185, 0.678));
+    }
+    50%{
+        background: linear-gradient(rgba(197, 196, 196, 0.705), rgba(155, 154, 154, 0.74));
+    }
+    100%{
+        background: linear-gradient(rgba(224, 224, 224, 0.479), rgba(187, 185, 185, 0.678));
+    }   
+}
