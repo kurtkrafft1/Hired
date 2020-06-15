@@ -4,6 +4,7 @@ import Sidebar from "./components/navbar"
 import "./components/navbar.css"
 import {NavLink} from 'react-router-dom';
 import "./hired.css"
+import logo from "./images/hiredlogo.png";
 
 
 const Hired = props => {
@@ -20,9 +21,9 @@ const Hired = props => {
             hasUser? (
                 <div id="outer-container">
                     
-                    <Sidebar />
+                    <Sidebar clearUser={clearUser}/>
                     <main id="page-wrap">
-                    <div className="page-header"><h1 className="title">Hired</h1></div>
+                    <div className="page-header"><div></div><div className="title-holder"><h1 className="title">Hired</h1></div><div className="logo-holder"><img src={logo} alt="logo" className="logo-thumbnail" /></div></div>
                         <ApplicationViews hasUser={hasUser} setHasUser={setHasUser}/>
                     </main>
                 </div>

@@ -1,8 +1,9 @@
 import { Route, Redirect, NavLink } from "react-router-dom";
 import React, {useState} from "react";
-import Home from "./components/home/home"
+import Dashboard from "./components/home/dashboard"
 import Login from "./components/login/login"
 import Register from "./components/login/Register"
+import UserProfiles from "./components/profiles/profiles"
 
 const ApplicationViews = props => {
 
@@ -29,13 +30,24 @@ const ApplicationViews = props => {
                 exact path = "/"
                 render={props=> {
                     if(hasUser){
-                        return <Home {...props} />
+                        return <Dashboard {...props} />
                         
                     } else {
                         return <Redirect to="/login" />
                         
                     }
                     
+                }}
+                />
+                <Route
+                exact path = '/profiles'
+                render={props=> {
+                    if(hasUser){
+                        return <UserProfiles {...props} />
+                    }
+                    else{
+                        return <Redirect to="/login" />
+                    }
                 }}
                 />
                 </div>
