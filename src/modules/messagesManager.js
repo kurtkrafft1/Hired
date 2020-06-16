@@ -10,5 +10,8 @@ export default {
                 "Authorization" : `Token ${token}`
             }
         }).then(r=>r.json())
+    },
+    getMessagesByJobId(id){
+        return fetch(`${baseUrl}messages?by_job=${id}`).then(r=>r.json())
     }
 }

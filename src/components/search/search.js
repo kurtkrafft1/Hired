@@ -100,7 +100,7 @@ const Search = props => {
         load the cards */}
         {hasSearched ===false? (<div className="block"><div className="sorry-holder"><h1 className="sorry-job">Enter in any or all of the fields above to begin your search!</h1></div></div>): 
         profiles.length===0? (<div className="block"><div className="sorry-holder"><h1 className="sorry-job">We're sorry, there are no results for your search, try again!</h1></div> </div>): 
-        <div className="ui cards">{profiles.map(profile=> <ResultCard key={profile.id} profile={profile} {...props} />)}</div>
+        <div className="ui cards add-top">{profiles.map(profile=> <ResultCard key={profile.id} profile={profile} {...props} />)}</div>
         }
 
 

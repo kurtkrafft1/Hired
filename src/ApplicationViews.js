@@ -9,6 +9,8 @@ import EditProfileForm from "./components/profiles/editProfileForm"
 import YourJobs from "./components/jobs/yourjobs"
 import Search from "./components/search/search"
 import MessageBoard from "./components/messages/messageBoard"
+import MessageDetails from "./components/messages/messagesDetails"
+
 const ApplicationViews = props => {
 
     const hasUser = props.hasUser
@@ -103,6 +105,17 @@ const ApplicationViews = props => {
                 render={props=> {
                     if(hasUser){
                         return <MessageBoard {...props} />
+                    }
+                    else {
+                        return <Redirect to="/login" />
+                    }
+                }}
+                />
+                <Route 
+                exact path = "/messages/:jobId(\d+)"
+                render={props=> {
+                    if(hasUser){
+                        return <MessageDetails  jobId={parseInt(props.match.params.jobId)} {...props} />
                     }
                     else {
                         return <Redirect to="/login" />
