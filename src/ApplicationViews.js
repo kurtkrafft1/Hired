@@ -7,6 +7,7 @@ import UserProfiles from "./components/profiles/profiles"
 import ProfileForm from "./components/profiles/profileForm"
 import EditProfileForm from "./components/profiles/editProfileForm"
 import YourJobs from "./components/jobs/yourjobs"
+import Search from "./components/search/search"
 
 const ApplicationViews = props => {
 
@@ -80,6 +81,17 @@ const ApplicationViews = props => {
                 render={props=> {
                     if(hasUser){
                         return <YourJobs {...props} />
+                    }
+                    else {
+                        return <Redirect to="/login" />
+                    }
+                }}
+                />
+                <Route 
+                exact path = "/search"
+                render={props=> {
+                    if(hasUser){
+                        return <Search {...props} />
                     }
                     else {
                         return <Redirect to="/login" />

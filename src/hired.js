@@ -32,7 +32,7 @@ const Hired = props => {
         
             ) : (
                 <div id="page-wrap">
-                <div className="page-header"><h1 className="title">Hired</h1></div>
+                 <div className="page-header"><div></div><div className="title-holder"><h1 className="title">Hired</h1></div><div className="logo-holder"><img src={logo} alt="logo" className="logo-thumbnail" /></div></div>
                 <ApplicationViews hasUser={hasUser} setHasUser={setHasUser}/>
                 </div>
             )
