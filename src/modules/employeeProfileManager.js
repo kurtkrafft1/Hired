@@ -37,5 +37,11 @@ export default{
                 "Authorization" : `Token ${token}`
             }
         })
+    },
+    searchProfilesWithJobTypeId(obj){
+        return fetch(`${baseUrl}employee_profiles?search&city=${obj.city}&title=${obj.title}&job_type_id=${obj.job_type_id}`).then(r=>r.json())
+    },
+    searchProfilesWithOutJobTypeId(obj){
+        return fetch(`${baseUrl}employee_profiles?search&city=${obj.city}&title=${obj.title}`).then(r=>r.json())
     }
 }

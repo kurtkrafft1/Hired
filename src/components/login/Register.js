@@ -34,7 +34,7 @@ const Register = props => {
 
     return (
         <>
-        <div className="login-box">
+        <div className="login-box reggy">
         <h2>Register</h2>
         <form>
             
