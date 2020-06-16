@@ -9,5 +9,8 @@ export default {
     },
     getJobsByUser(id){
         return fetch(`${baseUrl}jobs?by_user=${id}`).then(r=>r.json())
+    },
+    getOneJob(id){
+        return fetch(`${baseUrl}jobs/${id}`).then(r=>r.json())
     }
 }

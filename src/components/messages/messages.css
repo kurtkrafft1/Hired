@@ -1,0 +1,70 @@
+.message-container{
+    margin-top: 20px;
+    padding-left: 13px;
+}
+.mCard{
+    margin-right: 40px !important; 
+    margin-left: 2px !important;
+}
+.mCard:hover{
+    animation: pulse 2s infinite;
+    cursor: pointer !important;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(75, 163, 195, 0.267);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(75, 163, 195, 0.267);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(75, 163, 195, 0.267);
+    }
+}
+@keyframes pulse2 {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(75, 195, 111, 0.267);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(75, 195, 111, 0.267);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(75, 195, 111, 0.267);
+    }
+}
+.vCard {
+    margin-right: 40px !important; 
+    margin-left: 2px !important;
+}
+.vCard:hover{
+    animation: pulse2 2s infinite;
+    cursor: pointer !important;
+}
+.message-status{
+    background-color: #565656;
+    color: transparent;
+    text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
+    display: flex;
+    justify-content: flex-end;
+    /* align-items: flex-start; */
+ 
+}
+
+.flex-it{
+    display: flex !important;
+    justify-content: space-between;
+}
