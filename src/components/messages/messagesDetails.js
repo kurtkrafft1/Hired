@@ -126,7 +126,7 @@ const MessagesDetails = props => {
                                 {status==="notHired"? ("Hire") : status==="past"? ("Re-hire"): ("")}</Button>) : ("")}
                         </div>
                     </div>
-                    <div className="message-container">
+                    <div className="message-container-back">
                         <div className="messages-holder">
                     {
                         messages.map(message=> (

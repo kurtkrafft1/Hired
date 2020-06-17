@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
+// import MM from "../../modules/messagesManager"
 import JM from "../../modules/jobsManager"
+import dateFunction from '../dateFunction'
 
 const MessageBoardCard = props => {
     const [job, setJob] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const [status, setStatus] = useState("")
-
-    
 
     useEffect(()=> {
         JM.getOneJob(props.message.job_id).then(obj=> 
@@ -43,23 +43,23 @@ const MessageBoardCard = props => {
             </>
         )
     }else {
-    //the user is receiving the message so the customer will be the name shown
-    if(Number(props.user_id) === Number(props.message.receiver_customer.user.id)){
+    //the user is getting hired by the other user
+    if(Number(props.user_id) === Number(job.employee_profile.customer.user.id)){
         return (
             <>
-            <div class="card vCard">
-                <div class="content">
-                <div class="header flex-it">{props.message.customer.user.first_name} {props.message.customer.user.last_name[0]}.
-                <h5 className='message-status'>{status==="current"? ("Employed"): status==="past"? ("Was Employed"): status==="hire"? ("Potential Employee"): ("")}</h5></div>
-                    <div class="meta">{job.employee_profile.title}</div>
-                <div class="description add-bottom">
+            <div className="card vCard" onClick={()=> props.setJobId(job.id)}>
+                <div className="content">
+                <div className="header flex-it">{job.customer.user.first_name} {job.customer.user.last_name[0]}.
+                <h5 className='message-status'>Seeking You</h5></div>
+                    <div className="meta">{job.employee_profile.title}</div>
+                <div className="description add-bottom">
                     {props.message.content}
                     <br></br>
                     
                 </div>
              
                     
-            
+                <div className="meta">{dateFunction(props.message.created_at)}</div>
                 </div>
             </div>
             </>
@@ -71,13 +71,15 @@ const MessageBoardCard = props => {
     else {
         return (
             <>
-            <div class="card mCard">
-                <div class="content">
-                <div class="header">{props.message.receiver_customer.user.first_name} {props.message.receiver_customer.user.last_name[0]}.</div>
-                    <div class="meta">{job.employee_profile.title}</div>
-                <div class="description">
+            <div className="card mCard" onClick={()=> props.setJobId(job.id)}>
+                <div className="content">
+                <div className="header">{job.employee_profile.customer.user.first_name} {job.employee_profile.customer.user.last_name[0]}.
+                <h5 className='message-status'>{status==="current"? ("Employed"): status==="past"? ("Was Employed"): status==="hire"? ("Potential Employee"): ("")}</h5></div>
+                    <div className="meta">{job.employee_profile.title}</div>
+                <div className="description">
                     {props.message.content}
                 </div>
+                <div className="meta">{dateFunction(props.message.created_at)}</div>
                 </div>
             </div>
             </>
