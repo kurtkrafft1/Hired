@@ -40,12 +40,15 @@ html {
 }
 .title{
     font-size: 40px;
-    color: rgba(44, 95, 114, 0.733);
-    margin-bottom: 100px;
-    font-style: italic;
     font-family: 'Playfair Display', serif;
     letter-spacing: 2px;
     /* margin-bottom: 100px; */
+    background-color: rgba(44, 95, 114, 0.733);
+    color: transparent;
+    text-shadow: 0px 2px 3px rgba(66, 115, 133, 0.733);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
 }
 #page-wrap{
     /* background: linear-gradient(#4BA3C3, #4B4E6D); */

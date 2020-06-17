@@ -17,6 +17,7 @@ const MessageBoard = props => {
     const [isFirst, setIsFirst] = useState(true)
     const [messages, setMessages] = useState([])
     const [isSender, setIsSender] = useState(false)
+    const [reload, setReload] = useState(true)
     const [content, setContent] = useState({content: ""})
     const [job, setJob] = useState({id: "",employee_profile: {id: "",job_type_id: "",customer: {id: "",user: {id: "",first_name: "",last_name: ""},address: "",phone_number: "", zipcode: "",city: ""},title: "",description: "",ratings: ""},
     customer: {
@@ -51,21 +52,35 @@ const MessageBoard = props => {
              rcId = job.customer.id
         }
         const obj = {
-            content: content,
+            content: content["content"],
             receiver_customer_id: rcId,
             job_id : jobId
         }
         MM.postNewMessage(token, obj).then((messageFromApi)=> {
-            setJobId(1)
-            setJob(messageFromApi.job_id)
+            setReload(!reload) 
             setIsLoading(false) 
         })
     }
-
+    const changeStatus = (e) => {
+        e.preventDefault()
+        const id = jobId
+        if(status==="current"){
+            JM.addEndToJob(token, id).then(()=> setReload(!reload))
+        }
+        if(status==="notHired"){
+            JM.addStartToJob(token, id).then(()=> setReload(!reload))
+        }
+        if(status==="past"){
+            JM.rehireJob(token, id).then(()=> setReload(!reload))
+        }
+    }
     
 
     useEffect(()=> {
+        
+
         MM.getUserMessages(token).then(messageBlocks=>{
+            messageBlocks.reverse()
             setChains(messageBlocks)
             //if it is a users first time  on page set the current job id (to be referenced in getting messages ) as the most recent one
             if(isFirst){
@@ -74,7 +89,7 @@ const MessageBoard = props => {
             if(jobId>0){
             MM.getMessagesByJobId(jobId).then(arr=> {
                 //set the messages here
-                arr.reverse()
+                //the come out reverse but because we have a flex-boc column-reverse it looks normal
                 setMessages(arr)
                 //get the job associated with the messages because the messages will switch between who received and vice versa
                 JM.getOneJob(jobId).then(j=> { 
@@ -116,7 +131,7 @@ const MessageBoard = props => {
         })
         
 
-    }, [jobId])
+    }, [jobId, reload])
 
     
     if(isLoading){
@@ -139,12 +154,12 @@ const MessageBoard = props => {
                     <div className="message-container-back">
                         {/* find the other users name and display in the corner of the message box for clarity. then display a button for hiring */}
                     <div className="details-for-messages">{messages.length>0? Number(user_id)===messages[0].customer.user.id? (`${messages[0].receiver_customer.user.first_name} ${messages[0].receiver_customer.user.last_name[0]}.`) :(`${messages[0].customer.user.first_name} ${messages[0].customer.user.last_name[0]}.`) : ("")}
-                    <div classNamer="status-button-container">
-                            {Number(user_id)!==job.customer.user.id ?(""): status !== "current" ? (<Button color={status==="notHired"? ('green') : ('yellow')}>
-                                {status==="notHired"? ("Hire") : status==="past"? ("Re-hire"): ("")}</Button>) : ("")}
+                    <div className="status-button-container">
+                            {job.customer.user.id !== undefined? Number(user_id)!==job.customer.user.id ?(""): status !== "current" ? (<Button  id={job.id}color={status==="notHired"? ('green') : ('yellow')} onClick={changeStatus}>
+                                {status==="notHired"? ("Hire") : status==="past"? ("Re-hire"): ("")}</Button>) : (<Button id={job.id} color="purple" onClick={changeStatus}>End Job</Button>) :("")}   
                         </div>
                     </div>
-                        <div className="messages-holder">
+                        <div className="messages-holder" id='scroll'>
                             
                     {
                         messages.map(message=> (

@@ -1,10 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import JM from "../../modules/jobsManager"
+import MessageModal from "./messageModal"
 import EPM from "../../modules/employeeProfileManager"
 
 const ResultCard = props => {
     const [numJobs, setNumJobs] = useState(0)
+    const [messageModalOpen, setMessageModalOpen] = useState(false)
     const token = sessionStorage.getItem('token')
+
+    const toggleMessageModal = e=> {
+      setMessageModalOpen(!messageModalOpen)
+    }
 
 
     useEffect(()=> {
@@ -24,10 +30,12 @@ const ResultCard = props => {
     <div className="content">
       <div className="header">{props.profile.title}</div>    
       <div className="meta">
-        <a>Friends</a>
+        Located: {props.profile.customer.city}
       </div>
       <div className="description">
         {props.profile.description}
+        
+       
       </div>
     </div>
     <div className="extra content split">
@@ -36,7 +44,7 @@ const ResultCard = props => {
         {numJobs} Jobs
       </span>
       <span className="edit-icon">
-        
+      <MessageModal toggleMessageModal={toggleMessageModal} messageModalOpen={messageModalOpen} employee_profile_id={props.profile.id} {...props}/>
       </span>
     </div>
     </div>
