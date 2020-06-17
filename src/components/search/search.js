@@ -98,8 +98,8 @@ const Search = props => {
         {/* Some more Terenary Madness....the first conditional checks to see if the user has searched or not, if they haven't we welcome them and 
         give them a little instruction if they have searched we change to sorry no results found, if there are no results of course other than that we 
         load the cards */}
-        {hasSearched ===false? (<div className="block"><div className="sorry-holder"><h1 className="sorry-job">Enter in any or all of the fields above to begin your search!</h1></div></div>): 
-        profiles.length===0? (<div className="block"><div className="sorry-holder"><h1 className="sorry-job">We're sorry, there are no results for your search, try again!</h1></div> </div>): 
+        {hasSearched ===false? (<div className="block"><div className="sorry-holder"><h3 className="sorry-job title">Enter in any or all of the fields above to begin your search!</h3></div></div>): 
+        profiles.length===0? (<div className="block"><div className="sorry-holder"><h3 className="sorry-job title">We're sorry, there are no results for your search, try again!</h3></div> </div>): 
         <div className="ui cards add-top">{profiles.map(profile=> <ResultCard key={profile.id} profile={profile} {...props} />)}</div>
         }
 
