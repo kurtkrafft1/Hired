@@ -69,8 +69,11 @@ const Dashboard = props => {
                 setMostRecentJob(arr[0])
                 console.log(arr[0])
                 const filtered = arr.filter(obj=> obj.start_date !== null && obj.end_date === null)
-                setCurrentEmployee(filtered[0])
+                if(filtered.length>0){
+                    setCurrentEmployee(filtered[0])
                 console.log(filtered[0])
+                }
+                
             }
             //tell the page "hey page we are done loading"
         }).then(()=> setIsLoading(false))

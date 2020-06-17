@@ -8,6 +8,7 @@ import ProfileForm from "./components/profiles/profileForm"
 import EditProfileForm from "./components/profiles/editProfileForm"
 import YourJobs from "./components/jobs/yourjobs"
 import Search from "./components/search/search"
+import MessageBoard from "./components/messages/messageBoard"
 
 const ApplicationViews = props => {
 
@@ -98,7 +99,17 @@ const ApplicationViews = props => {
                     }
                 }}
                 />
-                
+                <Route 
+                exact path = "/messages"
+                render={props=> {
+                    if(hasUser){
+                        return <MessageBoard {...props} />
+                    }
+                    else {
+                        return <Redirect to="/login" />
+                    }
+                }}
+                />
                 </div>
                 </>
             )
