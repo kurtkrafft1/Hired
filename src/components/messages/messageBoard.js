@@ -143,7 +143,7 @@ const MessageBoard = props => {
     }else {
         return (
             <>
-                <div className="profiles-header"><h1>Messages</h1></div>
+                <div className="profiles-header"><h1 className="title">Messages</h1></div>
                 <div className="message-board">
                 <div className="message-container">
                     {/* check to see that there are message chains */}

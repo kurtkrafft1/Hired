@@ -27,7 +27,7 @@ const UserProfiles = props => {
     } else {
         return (
             <>
-            <div className="profiles-header"><h1>Your Profiles</h1><i className="plus big icon" onClick={()=> props.history.push('/profiles/new')}></i></div>
+            <div className="title profiles-header"><h1>Your Profiles</h1><i className="plus small icon" onClick={()=> props.history.push('/profiles/new')}></i></div>
             <div className="profile-card-holder">
             <div className="ui link cards">
             {userProfiles.map(up=> (

@@ -91,9 +91,10 @@ const Dashboard = props => {
             <div className="home" >
             
             <div className="alert-holder">
-            <div className="job-holder">{currentEmployee.end_date=== null && currentEmployee.start_date !== null ? (<h1>{currentEmployee.employee_profile.customer.user.first_name} {currentEmployee.employee_profile.customer.user.last_name[0]}. is currently helping you out!</h1>) :
+                
+                <div className="job-holder message-holder"><h1>(1) You have one new  message!</h1></div>
+                <div className="job-holder">{currentEmployee.end_date=== null && currentEmployee.start_date !== null ? (<h1>{currentEmployee.employee_profile.customer.user.first_name} {currentEmployee.employee_profile.customer.user.last_name[0]}. is currently helping you out!</h1>) :
             (<h1 className="center-text">No current employees</h1>)}</div>
-                <div className="message-holder"><h1>(1) You have one new  message!</h1></div>
                 {/* This text below me is confusing so I am sorry dear code reader. Essentially, I am checking to see if the mostRecent Job has a review and if the end date isnt
                 null. If those are true it means the user has had a recent job and hasn't left a review so we will give them the option to do that. Then we check to see if the end date is equal
                 to  "" because that means we set most recent job equal to itself so if that is true that haven't had any jobs, other than that we assume that they have left reviews. there  may 

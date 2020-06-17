@@ -48,7 +48,7 @@ const YourJobs = props=> {
     return (
     
             <>
-            <div className="profiles-header">
+            <div className="title profiles-header">
             <h1>Your Jobs</h1>
             <div>
                 <div className="ui left floated buttons outlined">
@@ -60,7 +60,7 @@ const YourJobs = props=> {
             </div>
             <div className="job-card-holder">
             <div className="ui link cards">
-            {jobs.length<1? (<div className="block"><div className="sorry-holder"><h1 className="sorry-job">Sorry, nothing came back! Trying searching for someone to hire or look for some people that may need help!</h1></div></div>)
+            {jobs.length<1? (<div className="block"><div className="sorry-holder title"><h1 className="sorry-job">Sorry, nothing came back! Try searching for someone to hire or look for some people that may need help!</h1></div></div>)
                :( jobs.map(job=> (
                     <JobCard key={job.id} job={job} {...props} />
                 )))

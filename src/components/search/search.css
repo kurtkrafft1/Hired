@@ -8,7 +8,8 @@
 	background: #f4f7f8;
 	border-radius: 8px;
 	font-family: Georgia, "Times New Roman", Times, serif;
-	box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.219);
+	box-sizing: border-box ;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
 }
 .form-style-4 fieldset{
     border: none;
