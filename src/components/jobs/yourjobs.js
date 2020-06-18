@@ -7,8 +7,10 @@ import JobCard from "./jobcard"
 const YourJobs = props=> {
     const [jobSelection, setJobSelection] = useState("current")
     const [jobs, setJobs] = useState([])
+    const [isYours, setIsYours] = useState(false)
     const user_id = sessionStorage.getItem('user_id')
     const [isLoading, setIsLoading] = useState(true)
+    const [reload, setReload] =  useState(true)
 
 
 
@@ -18,6 +20,7 @@ const YourJobs = props=> {
                 const filtered = arr.filter(obj=> obj.start_date !== null && obj.end_date === null)
                 setJobs(filtered)
                 console.log(filtered)
+                setIsYours(false)
                 setIsLoading(false)
             })
         }
@@ -25,17 +28,19 @@ const YourJobs = props=> {
             JM.getJobsForUser(user_id).then(arr=> {
                 const filtered = arr.filter(obj=> obj.start_date !== null && obj.end_date !== null)
                 setJobs(filtered)
+                setIsYours(false)
                 setIsLoading(false)
             })
         }
         if(jobSelection==="yours"){
             JM.getJobsByUser(user_id).then(arr=> {
                 const filtered = arr.filter(obj=> obj.start_date !== null)
+                setIsYours(true)
                 setJobs(filtered)
                 setIsLoading(false)
             })
         }
-    }, [jobSelection])
+    }, [jobSelection, reload])
     if(isLoading){
         return (
             <>
@@ -62,7 +67,7 @@ const YourJobs = props=> {
             <div className="ui link cards">
             {jobs.length<1? (<div className="block"><div className="sorry-holder title"><h1 className="sorry-job">Sorry, nothing came back! Try searching for someone to hire or look for some people that may need help!</h1></div></div>)
                :( jobs.map(job=> (
-                    <JobCard key={job.id} job={job} {...props} />
+                    <JobCard  reload={reload} setReload={setReload} isYours={isYours} key={job.id} job={job} {...props} />
                 )))
             }
             </div>

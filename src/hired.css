@@ -152,3 +152,10 @@ html {
     -webkit-text-stroke-width: .1em;
     -webkit-text-stroke-color: white;
 } */
+
+
+.add-hover-to-review:hover{
+    animation: pulse 2s infinite;
+    cursor: pointer;
+}
+

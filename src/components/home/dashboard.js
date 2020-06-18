@@ -3,6 +3,7 @@ import "./dashboard.css"
 import UM from "../../modules/userManager"
 import EPM from "../../modules/employeeProfileManager"
 import JM from "../../modules/jobsManager"
+import ReviewModal from "../reviewModal"
 
 
 
@@ -11,46 +12,26 @@ const Dashboard = props => {
     const [customer, setCustomer] = useState({user: {first_name:"", last_name: ""}})
     const [employeeProfiles, setEmployeeProfiles] = useState([])
     const [currentEmployee, setCurrentEmployee] = useState({})
-    const [mostRecentJob, setMostRecentJob] = useState( {
-        id: "",
-        employee_profile: {
-            id: "",
-            job_type_id: "",
-            customer: {
-                id: "",
-                user: {
-                    id: "",
-                    first_name: "",
-                    last_name: ""
-                },
-                address: "",
-                phone_number: "",
-                zipcode: "",
-                city: ""
-            },
+    const [mostRecentJob, setMostRecentJob] = useState( {id: "",
+    employee_profile: {id: "",job_type_id: "",
+            customer: {id: "",user: {id: "",first_name: "",last_name: ""},address: "",phone_number: "",zipcode: "",city: ""},
             title: "",
             description: "",
-            ratings: 0
-        },
-        customer: {
-            id: "",
-            user: {
-                id: "",
-                first_name: "",
-                last_name: ""
-            },
-            address: "",
-            phone_number: "",
-            zipcode: "",
-            city: ""
-        },
+            ratings: 0},
+        customer: {id: "",user: {id: "",first_name: "",last_name: ""},address: "",phone_number: "",zipcode: "",city: ""},
         start_date: "",
         end_date: "",
         review: ""
     })
     const token = sessionStorage.getItem('token')
     const user_id = sessionStorage.getItem('user_id')
+    const [reload, setReload] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
+    const [reviewModalOpen, setReviewModalOpen] = useState(false)
+
+    const toggleReviewModal= (e)=> {
+        setReviewModalOpen(!reviewModalOpen)
+    }
 
     useEffect(()=> {
         //get user information through the customer
@@ -77,7 +58,7 @@ const Dashboard = props => {
             }
             //tell the page "hey page we are done loading"
         }).then(()=> setIsLoading(false))
-    }, [])
+    }, [reload])
     if(isLoading){
         return (
             <>
@@ -99,9 +80,9 @@ const Dashboard = props => {
                 null. If those are true it means the user has had a recent job and hasn't left a review so we will give them the option to do that. Then we check to see if the end date is equal
                 to  "" because that means we set most recent job equal to itself so if that is true that haven't had any jobs, other than that we assume that they have left reviews. there  may 
                 be more conditionals to come so look out. */}
-        <div className="job-holder">{mostRecentJob.end_date !== "" && mostRecentJob.review ==="" && mostRecentJob.end_date !== null ?
-         (<h1>{mostRecentJob.employee_profile.customer.user.first_name} {mostRecentJob.employee_profile.customer.user.last_name[0]}. was your most recent worker, leave them a review by clicking here!</h1>): 
-         mostRecentJob.end_date === "" ?(<h1>You haven't had any jobs. You must be a busy bee!</h1>) : (<h1>Thank for being a reviewing superstar!</h1>)}</div>
+        {mostRecentJob.end_date !== "" && mostRecentJob.review ==="" && mostRecentJob.end_date !== null ?
+         (<ReviewModal reload={reload} setReload={setReload} toggleReviewModal={toggleReviewModal} mostRecentJob={mostRecentJob} reviewModalOpen={reviewModalOpen} job_id={mostRecentJob.id} {...props}/>): 
+         mostRecentJob.end_date === "" ?(<div className="job-holder"><h1>You haven't had any jobs. You must be a busy bee!</h1></div>) : (<div className="job-holder"><h1>Thank for being a reviewing superstar!</h1></div>)}
             </div>
             <div className="profile-holder">
                 <div className="name-n-img">
