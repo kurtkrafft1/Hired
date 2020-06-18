@@ -221,7 +221,7 @@
   }
    
   .messages-holder::-webkit-scrollbar-thumb {
-    background-color: white;
+    background-color: rgba(75, 78, 109, 0);
     outline: 1px solid white;
   }
   
