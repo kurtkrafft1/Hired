@@ -6,6 +6,7 @@ import {Button} from 'semantic-ui-react'
 import MessageCard from "./messageCard"
 import "./messages.css"
 import { stat } from 'fs'
+import { is } from '@babel/types'
 
 const MessageBoard = props => {
 
@@ -71,6 +72,21 @@ const MessageBoard = props => {
             JM.addStartToJob(token, id).then(()=> setReload(!reload))
         }
         if(status==="past"){
+            //uh oh spaghetti-os we gotta get a lil messy and confusing here.
+            //So, the user decided to rehire an employee. GREAT!
+            // the issue is we want a seamless transition for the user and we also don't want a ton of message board cards
+            //the cards on the left of the screen and we don't want to get rid of their past messages
+            // so what do we do? well. we just take the current job and create a duplicate of it essentially (minus the id of course)
+            // then we alter the original so that it is the new job!!! It may not be the best practice but it works and flows smoothly
+            JM.getOneJob(id).then(obj=> {
+                const new_obj = {
+                    end_date: obj.end_date,
+                    start_date: obj.start_date,
+                    review: obj.review,
+                    employee_profile_id: obj.employee_profile.id
+                }
+                JM.postNewRehiredJob(token, new_obj)
+            })
             JM.rehireJob(token, id).then(()=> setReload(!reload))
         }
     }

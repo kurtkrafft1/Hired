@@ -17,7 +17,9 @@ const YourJobs = props=> {
     useEffect(()=> {
         if(jobSelection==="current"){
             JM.getJobsForUser(user_id).then(arr=> {
+                console.log(arr)
                 const filtered = arr.filter(obj=> obj.start_date !== null && obj.end_date === null)
+                console.log(user_id)
                 setJobs(filtered)
                 console.log(filtered)
                 setIsYours(false)
