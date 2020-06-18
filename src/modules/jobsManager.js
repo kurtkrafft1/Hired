@@ -60,5 +60,15 @@ export default {
             },
             body: JSON.stringify(obj)
         })
+    },
+    postNewRehiredJob(token, obj){
+        return fetch (`${baseUrl}jobs?rehire`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                "Authorization" :`Token ${token}`
+            },
+            body: JSON.stringify(obj)
+        }).then(r=>r.json())
     }
 }
