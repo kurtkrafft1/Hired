@@ -40,7 +40,7 @@ html {
 }
 .title{
     font-size: 40px;
-    font-family: 'Playfair Display', serif;
+    /* font-family: 'Playfair Display', serif; */
     letter-spacing: 2px;
     /* margin-bottom: 100px; */
     background-color:none;
@@ -145,3 +145,10 @@ html {
     align-items: center;
     
 }
+
+/* .stroke{
+    font-size: 50px;
+    -webkit-text-fill-color: transparent; 
+    -webkit-text-stroke-width: .1em;
+    -webkit-text-stroke-color: white;
+} */
