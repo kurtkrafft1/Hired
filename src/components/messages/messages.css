@@ -175,7 +175,7 @@
   }
    
   .message-container::-webkit-scrollbar-thumb {
-    background-color: linear-gradient(#4BA3C3, #4B4E6D);
+    background-color:  rgba(75, 78, 109, 0);
     outline: 1px solid linear-gradient(#4BA3C3, #4B4E6D);
   }
   

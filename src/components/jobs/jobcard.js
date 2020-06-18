@@ -32,7 +32,7 @@ const JobCard = props => {
     </div>
     <div className="extra content split">
       <span>
-        {props.isYours? (props.job.review!== ""? ("Review: " +props.job.review): ("The employer hasn't left a review yet")) : props.job.review==="" ? (<ReviewModal reload={props.reload} setReload={props.setReload} toggleReviewModal={toggleReviewModal} reviewModalOpen={reviewModalOpen} job_id={props.job.id} {...props}/>) : (`Review: ${props.job.review}`)}
+        {props.isYours? (props.job.review!== ""? ("Review: " +props.job.review): ("The employer hasn't left a review yet")) : props.job.review==="" ? (<ReviewModal epId = {props.job.employee_profile.id} reload={props.reload} setReload={props.setReload} toggleReviewModal={toggleReviewModal} reviewModalOpen={reviewModalOpen} job_id={props.job.id} {...props}/>) : (`Review: ${props.job.review}`)}
         
       </span>
     </div>

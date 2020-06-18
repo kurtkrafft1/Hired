@@ -48,11 +48,9 @@ const Dashboard = props => {
                 setMostRecentJob(mostRecentJob)
             }else {
                 setMostRecentJob(arr[0])
-                console.log(arr[0])
                 const filtered = arr.filter(obj=> obj.start_date !== null && obj.end_date === null)
                 if(filtered.length>0){
                     setCurrentEmployee(filtered[0])
-                console.log(filtered[0])
                 }
                 
             }
@@ -62,7 +60,7 @@ const Dashboard = props => {
     if(isLoading){
         return (
             <>
-            <div className="loader-container"><div class="loader"></div></div>
+            <div className="loader-container"><div className="loader"></div></div>
             </>
         )
     }
@@ -93,7 +91,7 @@ const Dashboard = props => {
                 <div className="job-list-holder">
                     <ul>
                         {employeeProfiles.map(obj=> (
-                            <li>{obj.title}</li>    
+                            <li key={obj.id}>{obj.title}</li>    
                         ))}
                     </ul>
                 </div>
