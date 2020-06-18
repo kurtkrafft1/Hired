@@ -3,11 +3,13 @@
 	max-width: 500px;
 	padding: 10px 20px;
 	background: #f4f7f8;
-	margin: 10px auto;
+	margin: 50px auto;
 	padding: 20px;
 	background: #f4f7f8;
 	border-radius: 8px;
 	font-family: Georgia, "Times New Roman", Times, serif;
+	box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
 }
 .form-style-5 fieldset{
 	border: none;
@@ -47,6 +49,9 @@
 	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
 	box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
 	margin-bottom: 30px;
+}
+.form-style-5 textarea{
+	height: 120px;
 }
 .form-style-5 input[type="text"]:focus,
 .form-style-5 input[type="date"]:focus,

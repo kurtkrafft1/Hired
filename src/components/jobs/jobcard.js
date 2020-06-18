@@ -1,8 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "./jobscard.css"
 import dateFunction from "../dateFunction"
+import ReviewModal from "./2reviewModal"
 
 const JobCard = props => {
+  const [reviewModalOpen, setReviewModalOpen] = useState(false)
+
+
+    const toggleReviewModal= (e)=> {
+        setReviewModalOpen(!reviewModalOpen)
+    }
 
 
     return (
@@ -11,8 +18,8 @@ const JobCard = props => {
       <img src="https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg" />
     </div>
     <div className="content">
-      <div className="header">{props.job.employee_profile.customer.user.first_name} {props.job.employee_profile.customer.user.last_name[0]}.</div>    
-      <div className="header sub">{props.job.employee_profile.title}</div>    
+      <div className="header">{props.isYours ? (props.job.customer.user.first_name +" "+ props.job.customer.user.last_name[0]) : ( props.job.employee_profile.customer.user.first_name +" "+ props.job.employee_profile.customer.user.last_name[0])}.</div>    
+      <div className="header sub">{props.isYours? ("Hired you as a " + props.job.employee_profile.title): (props.job.employee_profile.title)}</div>    
       <div className="meta">
        
       </div>
@@ -25,7 +32,7 @@ const JobCard = props => {
     </div>
     <div className="extra content split">
       <span>
-        {props.job.review==="" ? (<a href="#">Wanna leave a review? Click here!</a>) : ("")}
+        {props.job.review==="" ? (<ReviewModal reload={props.reload} setReload={props.setReload} toggleReviewModal={toggleReviewModal} reviewModalOpen={reviewModalOpen} job_id={props.job.id} {...props}/>) : (`Review: ${props.job.review}`)}
         
       </span>
     </div>
