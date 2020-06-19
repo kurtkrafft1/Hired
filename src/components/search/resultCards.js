@@ -18,55 +18,55 @@ const ResultCard = props => {
       if (num === 1){
         return (
           <>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star"></span>
+          <span className="fa fa-star"></span>
+          <span className="fa fa-star"></span>
+          <span className="fa fa-star"></span>
           </>
         )
       }
       if (num === 2){
         return (
           <>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star"></span>
+          <span className="fa fa-star"></span>
+          <span className="fa fa-star"></span>
           </>
         )
       }
       if (num === 3){
         return (
           <>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star"></span>
+          <span className="fa fa-star"></span>
           </>
         )
       }
       if (num === 4){
         return (
           <>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star"></span>
           </>
         )
       }
       if (num === 5){
         return (
           <>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star checked"></span>
           </>
         )
       }
@@ -91,6 +91,9 @@ const ResultCard = props => {
       <div className="header">{props.profile.title}</div>    
       <div className="meta">
         Located: {props.profile.customer.city}
+      </div>
+      <div className="meta">
+        Rate: {props.profile.pay}
       </div>
       <div className="meta">
         Ratings: {getStars(props.profile.ratings)}

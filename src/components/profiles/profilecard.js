@@ -42,7 +42,7 @@ const ProfileCard = props => {
     <div className="content">
       <div className="header">{props.up.title}</div>    
       <div className="meta">
-        <a>Friends</a>
+        <a>Rate: {props.up.pay}</a>
       </div>
       <div className="description">
         {props.up.description}
