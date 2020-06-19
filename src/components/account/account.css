@@ -1,0 +1,50 @@
+.account-page{
+    display: flex;
+    justify-content: center;
+
+}
+.customer-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.detail-holder{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-top: 30px;
+}
+
+.address-holder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.email-holder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.account-detail{
+    margin-top: 0;
+    color: rgba(80, 79, 79, 0.863);
+}
+
+.information-title{
+    background-image:linear-gradient(#4BA3C3,rgba(44, 95, 114));
+  background-position:bottom center; /*Adjust the background-position to move the line*/
+  background-size:200px 2px; /*Adjust the background size to control length and height*/
+  background-repeat:no-repeat;
+  padding-bottom: 4px;
+}
+
+.edit-icon-account{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.push-down{
+    margin-top: 80px;
+}
