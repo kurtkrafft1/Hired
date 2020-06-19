@@ -84,7 +84,7 @@ const Dashboard = props => {
                 null. If those are true it means the user has had a recent job and hasn't left a review so we will give them the option to do that. Then we check to see if the end date is equal
                 to  "" because that means we set most recent job equal to itself so if that is true that haven't had any jobs, other than that we assume that they have left reviews. there  may 
                 be more conditionals to come so look out. */}
-        {mostRecentJob.end_date !== "" && mostRecentJob.review ==="" || mostRecentJob.review===null && mostRecentJob.end_date !== null ?
+        {mostRecentJob.end_date !== "" && mostRecentJob.review ==="" && mostRecentJob.end_date !== null ?
          (<ReviewModal reload={reload} setReload={setReload} toggleReviewModal={toggleReviewModal} mostRecentJob={mostRecentJob} reviewModalOpen={reviewModalOpen} job_id={mostRecentJob.id} {...props}/>): 
          mostRecentJob.end_date === "" ?(<div className="job-holder"><h1>You haven't had any jobs. You must be a busy bee!</h1></div>) : (<div className="job-holder"><h1>Thank for being a reviewing superstar!</h1></div>)}
             </div>

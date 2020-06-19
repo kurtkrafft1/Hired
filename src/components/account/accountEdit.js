@@ -71,7 +71,7 @@ const EditAccount = props => {
                 </div>
                 <div className="customer-info">
                     <h1 className="information-title">Information</h1>
-                    <div class="page add-marg-left">
+                    <div class="user-info add-marg-left">
                     <div className="fields">
                     <label class="field a-field a-field_a1">
                         <input class="field__input a-field__input" id="email" onChange={handleFieldChange} value={customer.user.email} />

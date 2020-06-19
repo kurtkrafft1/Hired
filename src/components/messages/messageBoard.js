@@ -35,6 +35,7 @@ const MessageBoard = props => {
     },
     start_date:null,
     end_date:null,
+    review: ""
     })
     const [status, setStatus] = useState("")
 
