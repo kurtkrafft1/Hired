@@ -9,6 +9,8 @@ import EditProfileForm from "./components/profiles/editProfileForm"
 import YourJobs from "./components/jobs/yourjobs"
 import Search from "./components/search/search"
 import MessageBoard from "./components/messages/messageBoard"
+import AccountPage from "./components/account/account"
+import EditAccount from "./components/account/accountEdit"
 
 const ApplicationViews = props => {
 
@@ -104,6 +106,28 @@ const ApplicationViews = props => {
                 render={props=> {
                     if(hasUser){
                         return <MessageBoard {...props} />
+                    }
+                    else {
+                        return <Redirect to="/login" />
+                    }
+                }}
+                />
+                <Route 
+                exact path = "/account"
+                render={props=> {
+                    if(hasUser){
+                        return <AccountPage {...props} />
+                    }
+                    else {
+                        return <Redirect to="/login" />
+                    }
+                }}
+                />
+                <Route 
+                exact path = "/account/edit"
+                render={props=> {
+                    if(hasUser){
+                        return <EditAccount {...props} />
                     }
                     else {
                         return <Redirect to="/login" />
