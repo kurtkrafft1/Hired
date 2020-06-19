@@ -23,6 +23,7 @@ const Dashboard = props => {
         end_date: "",
         review: ""
     })
+    const [ potentialEmployers, setPotentialEmployers] = useState([])
     const token = sessionStorage.getItem('token')
     const user_id = sessionStorage.getItem('user_id')
     const [reload, setReload] = useState(false)
@@ -41,6 +42,11 @@ const Dashboard = props => {
         //get all the employee profiles associated with the user
         EPM.getProfilesForUser(user_id).then(arr=> {
             setEmployeeProfiles(arr)
+        })
+        //get potential employers for User 
+        JM.getJobsByUser(user_id).then(arr=> {
+            const newArr = arr.filter(obj=> obj.start_date===null && obj.end_date===null)
+            setPotentialEmployers(newArr)
         })
         //get the jobs with the user and then set the most recent one to the state
         JM.getJobsForUser(user_id).then(arr=> {
@@ -78,7 +84,7 @@ const Dashboard = props => {
                 null. If those are true it means the user has had a recent job and hasn't left a review so we will give them the option to do that. Then we check to see if the end date is equal
                 to  "" because that means we set most recent job equal to itself so if that is true that haven't had any jobs, other than that we assume that they have left reviews. there  may 
                 be more conditionals to come so look out. */}
-        {mostRecentJob.end_date !== "" && mostRecentJob.review ==="" && mostRecentJob.end_date !== null ?
+        {mostRecentJob.end_date !== "" && mostRecentJob.review ==="" || mostRecentJob.review===null && mostRecentJob.end_date !== null ?
          (<ReviewModal reload={reload} setReload={setReload} toggleReviewModal={toggleReviewModal} mostRecentJob={mostRecentJob} reviewModalOpen={reviewModalOpen} job_id={mostRecentJob.id} {...props}/>): 
          mostRecentJob.end_date === "" ?(<div className="job-holder"><h1>You haven't had any jobs. You must be a busy bee!</h1></div>) : (<div className="job-holder"><h1>Thank for being a reviewing superstar!</h1></div>)}
             </div>
@@ -87,11 +93,19 @@ const Dashboard = props => {
                     <div className="img-thumbnail"><img src="https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg" alt="prof-pic" className="prof-pic-icon"/></div>
                     <div className="name-holder"><h1>{customer.user.first_name} {customer.user.last_name}</h1></div>
                 </div>
-                <h3 className="profile-header">Your Jobs</h3>
+                <h3 className="profile-header">Your Profiles</h3>
                 <div className="job-list-holder">
                     <ul>
                         {employeeProfiles.map(obj=> (
                             <li key={obj.id}>{obj.title}</li>    
+                        ))}
+                    </ul>
+                </div>
+                <h3 className="profile-header">Potential Employers</h3>
+                <div className="job-list-holder">
+                    <ul>
+                        {potentialEmployers.map(obj=> (
+                            <li key={obj.id}>{obj.customer.user.first_name} {obj.customer.user.last_name[0]}. -- Seeking {obj.employee_profile.title}</li>    
                         ))}
                     </ul>
                 </div>
