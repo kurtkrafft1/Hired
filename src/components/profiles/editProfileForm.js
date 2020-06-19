@@ -3,25 +3,77 @@ import EPM from "../../modules/employeeProfileManager"
 import JTM from "../../modules/jobtypeManager"
 
 const EditProfileForm = props => {
-    const [profile, setProfile] = useState({'job_type_id': "", "title": "", "description":""})
+    const [profile, setProfile] = useState({'job_type_id': "", "title": "", "description":"", 'pay': ""})
+    const [session, setSession] = useState(false)
+    const [hour, setHour] = useState(false)
     const [types, setTypes] = useState([])
     const token = sessionStorage.getItem('token')
+
+    const handleCheck1 = e => {
+        setSession(false)
+        setHour(true)
+    }
+    const handleCheck2 = e=> {
+        setHour(false)
+        setSession(true)
+    }
+
+    const reformatPay = () => {
+        const stateToChange = {...profile}
+        if(session){
+            if(stateToChange["pay"][0] !== "$"){
+                return `$${profile.pay}/session`
+            } else {
+                return `${profile.pay}/session`
+            }
+            
+        }
+        else if(hour){
+            if(stateToChange["pay"][0] !== "$"){
+                return `$${profile.pay}/hour`
+            } else {
+                return `${profile.pay}/hour`
+            }
+        }
+        
+    }
 
     const handleFieldChange = e => {
         const stateToChange = {...profile}
         stateToChange[e.target.id] = e.target.value
         setProfile(stateToChange)
     }
-    const handleSubmit = e=> {
+    const handleSubmit =async e=> {
         e.preventDefault()
-        console.log(profile)
-        EPM.editProfile(token, props.profileId, profile).then(()=> props.history.push("/profiles"))
+        const real_pay = await reformatPay()
+        
+        const newProfile = {
+            'job_type_id': profile.job_type_id,
+            "title": profile.title,
+            "description": profile.description,
+            "pay": real_pay
+        }
+        
+        EPM.editProfile(token, props.profileId, newProfile).then(()=> props.history.push("/profiles"))
     }
     useEffect(()=> {
         JTM.getAllJobTypes().then(arr=> {
             setTypes(arr)
         })
-        EPM.getOneProfile(props.profileId).then(obj=>{console.log(obj); setProfile(obj)})
+        EPM.getOneProfile(props.profileId).then(obj=>{
+            if(obj.pay.split('/')[1]==="hour"){
+                setHour(true)
+                setSession(false)
+            }
+            if(obj.pay.split('/')[1]==="session") { 
+                setSession(true)
+                setHour(false)
+            }
+                obj.pay = obj.pay.split("$")[1].split("/")[0]
+                setProfile(obj)
+           
+            
+        })
     }, [])
     return (
         <>
@@ -38,7 +90,18 @@ const EditProfileForm = props => {
                         <option value={type.id} selected={type["id"] === profile.job_type_id? true : false}>{type.title}</option>   
                     ))}
                 </optgroup>
-                </select>      
+                </select> 
+                <div className="pay-field">
+                <input type="text" id="pay" name="field1" value={profile.pay} onChange={handleFieldChange}/>
+                <div className="ui checked checkbox left">
+                    <input type="checkbox" id="hour" checked={hour} onClick={handleCheck1}/>
+                    <label>Per Hour</label>
+                </div>
+                <div className="ui checked checkbox">
+                    <input type="checkbox" id="session"checked={session} onClick={handleCheck2}/>
+                    <label>Per Session</label>
+                </div>
+                </div>     
             </fieldset>
             <input type="submit" value="Submit" />
         </form>

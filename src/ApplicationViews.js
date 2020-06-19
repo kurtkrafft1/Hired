@@ -110,11 +110,13 @@ const ApplicationViews = props => {
                     }
                 }}
                 />
+        
                 </div>
                 </>
             )
         }else {
             return(
+                
                 <>
                 <Route exact path = "/login"
             render ={props=> {
@@ -126,6 +128,7 @@ const ApplicationViews = props => {
                 return <Register {...props} setHasUser={setHasUser}/>
             }}
             />
+            <Route render={() => <Redirect to="/login" />} />
                 </>
             )
             
