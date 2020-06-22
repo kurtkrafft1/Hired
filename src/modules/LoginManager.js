@@ -18,5 +18,14 @@ export default {
             },
             body: JSON.stringify(obj)
         }).then(r=>r.json())
+    },
+    postCustomerPhoto(token, obj) {
+        return fetch(`${baseUrl}customers/${obj.get("id")}`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Token ${token}`
+            },
+            body: obj
+        })
     }
 }

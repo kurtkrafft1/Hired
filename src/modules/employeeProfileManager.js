@@ -1,8 +1,15 @@
 import baseUrl from "./baseurl"
 
 export default{
-    getProfilesForUser(id){
-        return fetch(`${baseUrl}employee_profiles?user_id=${id}`
+    getProfilesForUser(token){
+        return fetch(`${baseUrl}employee_profiles?user_id`, {
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+                "accept": "application/json",
+                "Authorization": `Token ${token}`
+            }
+        }
         ).then(r=>r.json())
     },
     postNewProfile(token, obj){

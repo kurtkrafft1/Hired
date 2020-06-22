@@ -29,7 +29,7 @@ const AccountPage = props => {
             <div className="account-page">
             <div className="profile-holder">
                 <div className="name-n-img">
-                        <div className="img-thumbnail"><img src="https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg" alt="prof-pic" className="prof-pic-icon"/></div>
+                        <div className="img-thumbnail"><img src={customer.profile_picture !== null? customer.profile_picture : "https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg"} alt="prof-pic" className="prof-pic-icon"/></div>
                         <div className="name-holder push-down"><h1>{customer.user.first_name} {customer.user.last_name}</h1></div>
                 </div>
                 <div className="customer-info">

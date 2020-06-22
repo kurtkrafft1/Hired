@@ -37,7 +37,7 @@ const ProfileCard = props => {
        
     <div className="card">
     <div className="image">
-      <img src="https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg" />
+      <img src={props.up.customer.profile_picture !== null? props.up.customer.profile_picture : "https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg"} />
     </div>
     <div className="content">
       <div className="header">{props.up.title}</div>    

@@ -159,6 +159,7 @@
   }
 
 .register-icon{
+  margin-top: 20px;
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -201,4 +202,17 @@
 
 .reggy{
   margin-top: 20px;
+}
+
+.reg{
+  margin-bottom: -10px !important;
+}
+
+.add-button-left{
+  display: flex;
+margin-top: 10px;
+  justify-content: space-between;
+}
+.file-name{
+  color: white;
 }
