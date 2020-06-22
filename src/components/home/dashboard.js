@@ -25,7 +25,6 @@ const Dashboard = props => {
     })
     const [ potentialEmployers, setPotentialEmployers] = useState([])
     const token = sessionStorage.getItem('token')
-    const user_id = sessionStorage.getItem('user_id')
     const [reload, setReload] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [reviewModalOpen, setReviewModalOpen] = useState(false)
@@ -40,16 +39,16 @@ const Dashboard = props => {
             setCustomer(obj)
         })
         //get all the employee profiles associated with the user
-        EPM.getProfilesForUser(user_id).then(arr=> {
+        EPM.getProfilesForUser(token).then(arr=> {
             setEmployeeProfiles(arr)
         })
         //get potential employers for User 
-        JM.getJobsByUser(user_id).then(arr=> {
+        JM.getJobsByUser(token).then(arr=> {
             const newArr = arr.filter(obj=> obj.start_date===null && obj.end_date===null)
             setPotentialEmployers(newArr)
         })
         //get the jobs with the user and then set the most recent one to the state
-        JM.getJobsForUser(user_id).then(arr=> {
+        JM.getJobsForUser(token).then(arr=> {
             if(arr.length <1){
                 setMostRecentJob(mostRecentJob)
             }else {
@@ -90,7 +89,7 @@ const Dashboard = props => {
             </div>
             <div className="profile-holder">
                 <div className="name-n-img">
-                    <div className="img-thumbnail"><img src="https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg" alt="prof-pic" className="prof-pic-icon"/></div>
+                    <div className="img-thumbnail"><img src={customer.profile_picture} alt="prof-pic" className="prof-pic-icon"/></div>
                     <div className="name-holder"><h1>{customer.user.first_name} {customer.user.last_name}</h1></div>
                 </div>
                 <h3 className="profile-header">Your Profiles</h3>

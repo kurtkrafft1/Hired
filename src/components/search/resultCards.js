@@ -85,7 +85,7 @@ const ResultCard = props => {
        
     <div className="card">
     <div className="image">
-      <img src="https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg" />
+      <img src={props.profile.customer.profile_picture !== null? props.profile.customer.profile_picture : "https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg"}/>
     </div>
     <div className="content">
       <div className="header">{props.profile.title}</div>    

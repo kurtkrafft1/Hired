@@ -15,7 +15,7 @@ const JobCard = props => {
     return (
         <div className="card">
     <div className="image">
-      <img src="https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg" />
+      <img src={props.isYours? (props.job.customer.profile_picture!== null ? props.job.customer.profile_picture :"https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg" ): (props.job.employee_profile.customer.profile_picture!== null? props.job.employee_profile.customer.profile_picture : "https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg")} />
     </div>
     <div className="content">
       <div className="header">{props.isYours ? (props.job.customer.user.first_name +" "+ props.job.customer.user.last_name[0]) : ( props.job.employee_profile.customer.user.first_name +" "+ props.job.employee_profile.customer.user.last_name[0])}.</div>    

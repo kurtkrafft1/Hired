@@ -6,12 +6,12 @@ import ProfileCard from "./profilecard"
 const UserProfiles = props => {
 
     const [userProfiles, setUserProfiles] = useState([])
-    const user_id = sessionStorage.getItem('user_id')
+    const token = sessionStorage.getItem('token')
     const [isLoading, setIsLoading] = useState(true)
     const [reload, setReload] = useState(true)
 
     useEffect(()=> {
-        EPM.getProfilesForUser(user_id).then(arr=> {
+        EPM.getProfilesForUser(token).then(arr=> {
             setUserProfiles(arr)
             setIsLoading(false)
         })

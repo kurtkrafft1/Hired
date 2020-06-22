@@ -1,16 +1,24 @@
 import React, {useState, useEffect} from 'react'
 import UM from "../../modules/userManager"
+import LM from "../../modules/LoginManager"
 import "./accountEdit.css"
-import {Button} from "semantic-ui-react"
+import { Grid, Button, TextField} from '@material-ui/core';
+import Fab from '@material-ui/core/Fab';
 
 const EditAccount = props => {
     const [customer, setCustomer] = useState({})
     const [userEmail, setUserEmail] = useState({"email": ""})
     const [isLoading, setIsLoading] = useState(true)
     const token = sessionStorage.getItem('token')
+    const [url, setUrl] = useState()
+    const [profile_picture, setProfilePicture] = useState({})
 
     const handleFieldChange = e=> {
         const stateToChange = {...customer}
+        if (e.target.id === "profile_picture") {
+            setProfilePicture( e.target.files[0])
+            setUrl(URL.createObjectURL(e.target.files[0]))
+          }
         if(e.target.id==="email"){
             stateToChange.user.email = e.target.value
         }else {
@@ -18,14 +26,25 @@ const EditAccount = props => {
         }
         
         setCustomer(stateToChange)
+        console.log(customer)
     }
+    const gatherFormData = (obj) => {
+        console.log(obj)
+        const formdata = new FormData();
+        formdata.append("id", obj.id);
+        formdata.append("address", obj.address);
+        formdata.append("city", obj.city)
+        formdata.append("phone_number", obj.phone_number)
+        formdata.append("profile_picture", profile_picture)
+        return formdata
+      }
 
     const handleEmailChange = e=> {
         const stateToChange = {...userEmail}
         stateToChange[e.target.id] = e.target.value
         setUserEmail(stateToChange)
     }
-    const handleSubmit = e=> {
+    const handleSubmit = async e=> {
         e.preventDefault()
         const updated_customer = {
             "id": customer.id,
@@ -33,11 +52,13 @@ const EditAccount = props => {
             'city': customer.city,
             "phone_number": customer.phone_number
         }
+        const data = await gatherFormData(customer)
         const updated_user = {
             "id": customer.user.id,
             "email": customer.user.email
         }
         UM.updateCustomer(token, updated_customer).then(()=> {
+            LM.postCustomerPhoto(token, data)
             UM.updateUser(token, updated_user).then(()=> props.history.push('/account'))
         })
 
@@ -49,6 +70,7 @@ const EditAccount = props => {
         UM.getUserInformation(token).then(obj=> {
             setUserEmail(obj.user.email)
             setCustomer(obj)
+            setUrl(obj.profile_picture)
         }).then(()=>{setIsLoading(false)})
     },[])
 
@@ -66,8 +88,42 @@ const EditAccount = props => {
             <div className="account-page">
             <div className="profile-holder">
                 <div className="name-n-img">
-                        <div className="img-thumbnail"><img src="https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg" alt="prof-pic" className="prof-pic-icon"/></div>
-                        <div className="name-holder push-down"><h1>{customer.user.first_name} {customer.user.last_name}</h1></div>
+                    <div className="img-container">
+                        <div className="img-thumbnail"><img src={url} alt="prof-pic" className="prof-pic-icon"/></div>
+                        <div item xs={12} md={6} className="add-button-left">
+                                <div className="file-name">
+                                <h4>{profile_picture.name
+                                        ? profile_picture.name.length > 30 
+                                            ? "..." + profile_picture.name.substring(profile_picture.name.length -30, profile_picture.name.length)
+                                            : profile_picture.name
+                                        : "Upload Profile Picture"
+                                    }</h4>
+                                </div>
+                                <TextField
+                                    style={{display: 'none'}}
+                                    fullWidth
+                                    accept="image/*"
+                                    id="profile_picture"
+                                    name="profile_picture"
+                                    label="Image"
+                                    type="file"
+                                    onChange={handleFieldChange}
+                                />
+                                <label htmlFor="profile_picture">
+                                <Fab
+                                    color="Primary"
+                                    size="small"
+                                    component="span"
+                                    aria-label="add"
+                                    variant="extended"
+                                    style={{display:'flex'}}
+                                >
+                                    Upload new photo
+                                </Fab>
+                                </label>
+                                </div>
+            </div>
+            <div className="name-holder push-down"><h1>{customer.user.first_name} {customer.user.last_name}</h1></div>
                 </div>
                 <div className="customer-info">
                     <h1 className="information-title">Information</h1>
@@ -105,7 +161,7 @@ const EditAccount = props => {
                     </div>
                 </div>
                 <div className="edit-icon-account">
-                    <Button disabled={isLoading} onClick={handleSubmit}>Submit</Button>
+                    < button disabled={isLoading} onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
             </div>

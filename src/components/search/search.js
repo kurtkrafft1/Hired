@@ -56,7 +56,9 @@ const Search = props => {
         if(searchParams.job_type_id === 0){
             EPM.searchProfilesWithOutJobTypeId(lowercase_obj).then(arr=> setProfiles(arr))
         } else {
-            EPM.searchProfilesWithJobTypeId(lowercase_obj).then(arr=>setProfiles(arr))
+            EPM.searchProfilesWithJobTypeId(lowercase_obj).then(arr=>{
+                console.log(arr)
+                setProfiles(arr)})
         }
     }
 

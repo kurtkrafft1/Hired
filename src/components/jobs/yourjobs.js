@@ -8,7 +8,7 @@ const YourJobs = props=> {
     const [jobSelection, setJobSelection] = useState("current")
     const [jobs, setJobs] = useState([])
     const [isYours, setIsYours] = useState(false)
-    const user_id = sessionStorage.getItem('user_id')
+    const token = sessionStorage.getItem('token')
     const [isLoading, setIsLoading] = useState(true)
     const [reload, setReload] =  useState(true)
 
@@ -16,7 +16,8 @@ const YourJobs = props=> {
 
     useEffect(()=> {
         if(jobSelection==="current"){
-            JM.getJobsForUser(user_id).then(arr=> {
+            JM.getJobsForUser(token).then(arr=> {
+                console.log(arr)
                 const filtered = arr.filter(obj=> obj.start_date !== null && obj.end_date === null)
                 setJobs(filtered)
                 setIsYours(false)
@@ -24,7 +25,8 @@ const YourJobs = props=> {
             })
         }
         if(jobSelection==="past"){
-            JM.getJobsForUser(user_id).then(arr=> {
+            JM.getJobsForUser(token).then(arr=> {
+                console.log(arr)
                 const filtered = arr.filter(obj=> obj.start_date !== null && obj.end_date !== null)
                 setJobs(filtered)
                 setIsYours(false)
@@ -32,7 +34,7 @@ const YourJobs = props=> {
             })
         }
         if(jobSelection==="yours"){
-            JM.getJobsByUser(user_id).then(arr=> {
+            JM.getJobsByUser(token).then(arr=> {
                 const filtered = arr.filter(obj=> obj.start_date !== null)
                 setIsYours(true)
                 setJobs(filtered)
