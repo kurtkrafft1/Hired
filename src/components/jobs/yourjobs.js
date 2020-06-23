@@ -58,8 +58,8 @@ const YourJobs = props=> {
             <h1>Your Jobs</h1>
             <div>
                 <div className="ui left floated buttons outlined">
-                    <button className="ui button add-shadow" onClick={()=> setJobSelection('current')}>Current Jobs</button>
-                    <button className="ui button" onClick={()=> setJobSelection('past')}>Past Jobs</button>
+                    <button className="ui button add-shadow" onClick={()=> setJobSelection('current')}>Current Hires</button>
+                    <button className="ui button" onClick={()=> setJobSelection('past')}>Past Hires</button>
                     <button className="ui button" onClick={()=> setJobSelection('yours')}>Your Jobs</button>
                 </div>
             </div>

@@ -26,7 +26,8 @@ const MessageModal = props => {
             const new_message = {
                 job_id: obj.id,
                 receiver_customer_id: obj.employee_profile.customer.id,
-                content: message.message
+                content: message.message,
+                seen: false
             }
             MM.postNewMessage(token, new_message).then(()=> props.history.push('/messages'))
         })

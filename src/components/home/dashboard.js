@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import "./dashboard.css"
 import UM from "../../modules/userManager"
 import EPM from "../../modules/employeeProfileManager"
+import MM from "../../modules/messagesManager"
 import JM from "../../modules/jobsManager"
 import ReviewModal from "../reviewModal"
 
@@ -12,6 +13,7 @@ const Dashboard = props => {
     const [customer, setCustomer] = useState({user: {first_name:"", last_name: ""}})
     const [employeeProfiles, setEmployeeProfiles] = useState([])
     const [currentEmployee, setCurrentEmployee] = useState({})
+    const [numberMessages, setNumberMessages] = useState(0)
     const [mostRecentJob, setMostRecentJob] = useState( {id: "",
     employee_profile: {id: "",job_type_id: "",
             customer: {id: "",user: {id: "",first_name: "",last_name: ""},address: "",phone_number: "",zipcode: "",city: ""},
@@ -60,7 +62,9 @@ const Dashboard = props => {
                 
             }
             //tell the page "hey page we are done loading"
-        }).then(()=> setIsLoading(false))
+        })
+        MM.getNewMessages(token).then(arr=> setNumberMessages(arr.length))
+        .then(()=> setIsLoading(false))
     }, [reload])
     if(isLoading){
         return (
@@ -76,7 +80,7 @@ const Dashboard = props => {
             
             <div className="alert-holder">
                 
-                <div className="job-holder message-holder"><h1>(1) You have one new  message!</h1></div>
+        {numberMessages>0? (<div className="job-holder message-holder"><h1>You have {numberMessages} new  message{numberMessages>1? ("s"): ""}!</h1></div>) : (<div className="job-holder"><h1>No new messages</h1></div>)}
                 <div className="job-holder">{currentEmployee.end_date=== null && currentEmployee.start_date !== null ? (<h1>{currentEmployee.employee_profile.customer.user.first_name} {currentEmployee.employee_profile.customer.user.last_name[0]}. is currently helping you out!</h1>) :
             (<h1 className="center-text">No current employees</h1>)}</div>
                 {/* This text below me is confusing so I am sorry dear code reader. Essentially, I am checking to see if the mostRecent Job has a review and if the end date isnt
@@ -89,7 +93,7 @@ const Dashboard = props => {
             </div>
             <div className="profile-holder">
                 <div className="name-n-img">
-                    <div className="img-thumbnail"><img src={customer.profile_picture} alt="prof-pic" className="prof-pic-icon"/></div>
+                    <div className="img-thumbnail"><img src={customer.profile_picture !== null? customer.profile_picture : "https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg"} alt="prof-pic" className="prof-pic-icon"/></div>
                     <div className="name-holder"><h1>{customer.user.first_name} {customer.user.last_name}</h1></div>
                 </div>
                 <h3 className="profile-header">Your Profiles</h3>
