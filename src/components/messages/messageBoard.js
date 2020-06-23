@@ -20,6 +20,7 @@ const MessageBoard = props => {
     const [isSender, setIsSender] = useState(false)
     const [reload, setReload] = useState(true)
     const [content, setContent] = useState({content: ""})
+    const [noMessages, setNoMessages] = useState(false)
     const [job, setJob] = useState({id: "",employee_profile: {id: "",job_type_id: "",customer: {id: "",user: {id: "",first_name: "",last_name: ""},address: "",phone_number: "", zipcode: "",city: ""},title: "",description: "",ratings: ""},
     customer: {
         id: "",
@@ -99,52 +100,58 @@ const MessageBoard = props => {
         MM.getUserMessages(token).then(messageBlocks=>{
             messageBlocks.reverse()
             setChains(messageBlocks)
-            //if it is a users first time  on page set the current job id (to be referenced in getting messages ) as the most recent one
-            if(isFirst){
-                setJobId(messageBlocks[0].job_id)
-            }
-            if(jobId>0){
-            MM.getMessagesByJobId(jobId).then(arr=> {
-                //set the messages here
-                //the come out reverse but because we have a flex-boc column-reverse it looks normal
-                setMessages(arr)
-                //get the job associated with the messages because the messages will switch between who received and vice versa
-                JM.getOneJob(jobId).then(j=> { 
-                    //check to be sure the user is associated with the job therefor associated and can view the messages
-                    if(Number(user_id)=== j.customer.user.id || Number(user_id)===j.employee_profile.customer.user.id){
-                        setJob(j)
-                        //check to see if the user is the customer or the employee
-                        if(j.customer.user.id === Number(user_id)){
-                            setIsSender(true)
-                        } 
-                        else {
-                            setIsSender(false)
-                        }
-                        //check to see if they have been hired or still looking
-                        if(j.start_date===null){
-                            setStatus('notHired')
-                        }
-                        if(j.end_date === null && j.start_date !==null ){
-                            // check to see if they are currently working
-                            setStatus('current')
-                        }
-                        //check to see if they worked in the past
-                        if(j.end_date !== null){
-                            setStatus('past')
-                        }
-                        setIsFirst(false)
-                        setIsLoading(false)
-                    
-                    }else {
-                        setIsFirst(false)
-                        setIsLoading(false)
-                    }
-    
-                })
-            })} else {
-                setIsFirst(false)
+            if(messageBlocks.length<1){
+                setNoMessages(true)
                 setIsLoading(false)
+            } else {
+                if(isFirst){
+                    setJobId(messageBlocks[0].job_id)
+                }
+                if(jobId>0){
+                MM.getMessagesByJobId(jobId).then(arr=> {
+                    //set the messages here
+                    //the come out reverse but because we have a flex-boc column-reverse it looks normal
+                    setMessages(arr)
+                    //get the job associated with the messages because the messages will switch between who received and vice versa
+                    JM.getOneJob(jobId).then(j=> { 
+                        //check to be sure the user is associated with the job therefor associated and can view the messages
+                        if(Number(user_id)=== j.customer.user.id || Number(user_id)===j.employee_profile.customer.user.id){
+                            setJob(j)
+                            //check to see if the user is the customer or the employee
+                            if(j.customer.user.id === Number(user_id)){
+                                setIsSender(true)
+                            } 
+                            else {
+                                setIsSender(false)
+                            }
+                            //check to see if they have been hired or still looking
+                            if(j.start_date===null){
+                                setStatus('notHired')
+                            }
+                            if(j.end_date === null && j.start_date !==null ){
+                                // check to see if they are currently working
+                                setStatus('current')
+                            }
+                            //check to see if they worked in the past
+                            if(j.end_date !== null){
+                                setStatus('past')
+                            }
+                            setIsFirst(false)
+                            setIsLoading(false)
+                        
+                        }else {
+                            setIsFirst(false)
+                            setIsLoading(false)
+                        }
+        
+                    })
+                })} else {
+                    setIsFirst(false)
+                    setIsLoading(false)
+                }
             }
+            //if it is a users first time  on page set the current job id (to be referenced in getting messages ) as the most recent one
+            
         })
         
 
@@ -155,6 +162,13 @@ const MessageBoard = props => {
         return (
             <>
             <div className="loader-container"><div className="loader"></div></div>
+            </>
+        )
+    }
+    if(noMessages){
+        return (
+            <>
+            <div className="block"><div className="sorry-holder"><h3 className="sorry-job title">No messages found, please try looking for some people to hire!</h3></div></div>
             </>
         )
     }else {
