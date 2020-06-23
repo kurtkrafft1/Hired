@@ -24,5 +24,24 @@ export default {
             },
             body: JSON.stringify(obj)
         }).then(r=>r.json())
+    },
+    updateSeen(id){
+        return fetch(`${baseUrl}messages/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            }
+        })
+    },
+    getNewMessages(token){
+        return fetch(`${baseUrl}messages?new_messages`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization" : `Token ${token}`
+            }
+        }).then(r=>r.json())
     }
 }

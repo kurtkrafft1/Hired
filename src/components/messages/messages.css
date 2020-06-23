@@ -228,3 +228,36 @@
   .messages-holder::-webkit-scrollbar-corner {
     background: white;
   }
+
+  .newMessage{
+      display: flex;
+      justify-content: flex-end;
+     
+  
+  }
+  .add-shine{
+      background-color: #8cdab7d7;
+      color: white;
+      padding: 4px;
+      border-radius: 2px;
+      animation: rocking 2s infinite;
+      
+  }
+
+
+  @keyframes rocking {
+    0% {
+        transform: scale(0.88);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7) !important;
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0) !important;
+    }
+
+    100% {
+        transform: scale(0.88);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
+    }
+}

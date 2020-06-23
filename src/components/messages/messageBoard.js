@@ -7,6 +7,7 @@ import MessageCard from "./messageCard"
 import "./messages.css"
 import { stat } from 'fs'
 import { is } from '@babel/types'
+import checkIsSeen from "./checkSeen"
 
 const MessageBoard = props => {
 
@@ -105,7 +106,10 @@ const MessageBoard = props => {
                 setIsLoading(false)
             } else {
                 if(isFirst){
+                    setIsFirst(false)
                     setJobId(messageBlocks[0].job_id)
+                    checkIsSeen(user_id, messageBlocks[0].job_id)
+                    
                 }
                 if(jobId>0){
                 MM.getMessagesByJobId(jobId).then(arr=> {
@@ -180,7 +184,7 @@ const MessageBoard = props => {
                     {/* check to see that there are message chains */}
 
                     {chains.length===0? (<div className="block"><div className="sorry-holder"><h1 className="sorry-job">No messages found</h1></div></div>)
-                    : (<div className="ui cards">{chains.map(message=> <MessageBoardCard key={message.id} message={message} user_id = {user_id} setJobId={setJobId}/>)}</div>)}
+                    : (<div className="ui cards">{chains.map(message=> <MessageBoardCard checkIsSeen={checkIsSeen} key={message.id} message={message} user_id = {user_id} setJobId={setJobId}/>)}</div>)}
                 </div>
                     <div className="message-container-back">
                         {/* find the other users name and display in the corner of the message box for clarity. then display a button for hiring */}
