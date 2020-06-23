@@ -70,7 +70,13 @@ const EditAccount = props => {
         UM.getUserInformation(token).then(obj=> {
             setUserEmail(obj.user.email)
             setCustomer(obj)
-            setUrl(obj.profile_picture)
+            if(obj.profile_picture !== null){
+                setUrl(obj.profile_picture)
+            }
+            else {
+                setUrl("https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg")
+            }
+            
         }).then(()=>{setIsLoading(false)})
     },[])
 

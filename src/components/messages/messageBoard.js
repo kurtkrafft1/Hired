@@ -49,6 +49,7 @@ const MessageBoard = props => {
     const sendMessage = e=> {
         e.preventDefault()
         setIsLoading(true)
+        checkIsSeen(user_id, jobId)
         let rcId = 0
         if(Number(user_id)===job.customer.user.id){
               rcId = job.employee_profile.customer.id
@@ -58,8 +59,10 @@ const MessageBoard = props => {
         const obj = {
             content: content["content"],
             receiver_customer_id: rcId,
-            job_id : jobId
+            job_id : jobId,
+            seen: false
         }
+        debugger
         MM.postNewMessage(token, obj).then((messageFromApi)=> {
             setReload(!reload) 
             setIsLoading(false) 
@@ -113,6 +116,7 @@ const MessageBoard = props => {
                 }
                 if(jobId>0){
                 MM.getMessagesByJobId(jobId).then(arr=> {
+                    checkIsSeen(user_id, jobId)
                     //set the messages here
                     //the come out reverse but because we have a flex-boc column-reverse it looks normal
                     setMessages(arr)

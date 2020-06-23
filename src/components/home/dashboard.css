@@ -94,3 +94,9 @@ justify-content: space-evenly;
     margin-top: 35px;
     margin-left: 10px;
 }
+.change-cursor:hover{
+    cursor: pointer;
+}   
+.grey{
+    color: rgba(128, 128, 128, 0.76);
+}
