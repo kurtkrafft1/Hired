@@ -37,7 +37,7 @@ const AccountPage = props => {
                     <div className="detail-holder">
                         <div className="email-holder">
                             <h2 className="account-title">Email</h2>
-                            <h5 className="account-detail">{customer.user.email}</h5>
+                            <h5 className="account-detail">{customer.user.username}</h5>
                         </div>
                         <div className="address-holder">
                             <h2 className="account-title">Address</h2>

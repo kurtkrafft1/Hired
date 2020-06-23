@@ -94,7 +94,7 @@ const Dashboard = props => {
             <div className="profile-holder">
                 <div className="name-n-img">
                     <div className="img-thumbnail"><img src={customer.profile_picture !== null? customer.profile_picture : "https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg"} alt="prof-pic" className="prof-pic-icon"/></div>
-                    <div className="name-holder"><h1>{customer.user.first_name} {customer.user.last_name}</h1></div>
+                    <div className="name-holder"><h2 className="your-name">{customer.user.first_name} {customer.user.last_name}</h2></div>
                 </div>
                 <h3 className="profile-header">Your Profiles</h3>
                 <div className="job-list-holder">

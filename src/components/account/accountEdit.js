@@ -19,8 +19,8 @@ const EditAccount = props => {
             setProfilePicture( e.target.files[0])
             setUrl(URL.createObjectURL(e.target.files[0]))
           }
-        if(e.target.id==="email"){
-            stateToChange.user.email = e.target.value
+        if(e.target.id==="username"){
+            stateToChange.user.username = e.target.value
         }else {
             stateToChange[e.target.id] = e.target.value
         }
@@ -55,7 +55,7 @@ const EditAccount = props => {
         const data = await gatherFormData(customer)
         const updated_user = {
             "id": customer.user.id,
-            "email": customer.user.email
+            "email": customer.user.username
         }
         UM.updateCustomer(token, updated_customer).then(()=> {
             LM.postCustomerPhoto(token, data)
@@ -130,7 +130,7 @@ const EditAccount = props => {
                     <div class="user-info add-marg-left">
                     <div className="fields">
                     <label class="field a-field a-field_a1">
-                        <input class="field__input a-field__input" id="email" onChange={handleFieldChange} value={customer.user.email} />
+                        <input class="field__input a-field__input" id="username" onChange={handleFieldChange} value={customer.user.username} />
                         <span class="a-field__label-wrap">
                         <span class="a-field__label">Email</span>
                         </span>
