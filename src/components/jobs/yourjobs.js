@@ -37,6 +37,7 @@ const YourJobs = props=> {
             JM.getJobsByUser(token).then(arr=> {
                 const filtered = arr.filter(obj=> obj.start_date !== null)
                 setIsYours(true)
+                filtered.reverse()
                 setJobs(filtered)
                 setIsLoading(false)
             })
