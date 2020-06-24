@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import EPM from "../../modules/employeeProfileManager"
 import JTM from "../../modules/jobtypeManager"
 import "./profform.css"
+import BackButton from "../back_button"
 
 const ProfileForm = props => {
     const [profile, setProfile] = useState({'job_type_id': "", "title": "", "description":"", "pay":""})
@@ -67,6 +68,7 @@ const ProfileForm = props => {
 
     return (
         <>
+        <BackButton path={'/profiles'} {...props}/>
         <div className="form-style-5">
         <form onSubmit={handleSubmit}>
             <fieldset>

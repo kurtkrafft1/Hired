@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import EPM from "../../modules/employeeProfileManager"
 import JTM from "../../modules/jobtypeManager"
+import BackButton from "../back_button";
 
 const EditProfileForm = props => {
     const [profile, setProfile] = useState({'job_type_id': "", "title": "", "description":"", 'pay': ""})
@@ -77,17 +78,18 @@ const EditProfileForm = props => {
     }, [])
     return (
         <>
+        <BackButton path={'/profiles'} {...props}/>
         <div className="form-style-5">
         <form onSubmit={handleSubmit}>
             <fieldset>
                 <legend><span className="number">H</span> Profile Info</legend>
                 <input type="text" id="title" name="field1" placeholder="Job Title" value={profile.title} onChange={handleFieldChange}/>
                 <textarea name="field3" id="description" placeholder="Job Description" value={profile.description} onChange={handleFieldChange}></textarea>
-                <label for="job">Job Type:</label>
+                <label htmlFor="job">Job Type:</label>
                 <select id="job_type_id" name="field4" onChange={handleFieldChange}> 
                 <optgroup label="Jobs">
                     {types.map(type=> (
-                        <option value={type.id} selected={type["id"] === profile.job_type_id? true : false}>{type.title}</option>   
+                        <option key={type.id} value={type.id} selected={type["id"] === profile.job_type_id? true : false}>{type.title}</option>   
                     ))}
                 </optgroup>
                 </select> 
