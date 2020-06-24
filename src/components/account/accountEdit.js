@@ -4,6 +4,7 @@ import LM from "../../modules/LoginManager"
 import "./accountEdit.css"
 import { Grid, Button, TextField} from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
+import BackButton from "../back_button"
 
 const EditAccount = props => {
     const [customer, setCustomer] = useState({})
@@ -91,6 +92,7 @@ const EditAccount = props => {
 
         return (
             <>
+            <BackButton path={'/account'} {...props}/>
             <div className="account-page">
             <div className="profile-holder">
                 <div className="name-n-img">

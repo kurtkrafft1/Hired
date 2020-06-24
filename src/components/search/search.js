@@ -53,7 +53,7 @@ const Search = props => {
             }
         }
 
-        if(searchParams.job_type_id === 0){
+        if(searchParams.job_type_id === "0" || searchParams.job_type_id === 0){
             EPM.searchProfilesWithOutJobTypeId(lowercase_obj).then(arr=> setProfiles(arr))
         } else {
             EPM.searchProfilesWithJobTypeId(lowercase_obj).then(arr=>{
@@ -87,6 +87,7 @@ const Search = props => {
                 <select id="job_type_id" name="field4" onChange={handleFieldChange}> 
                 <optgroup label="Jobs">
                     <option selected disabled value="None Selected">--Job type (optional)--</option>
+                    <option selected value={0}>All Job Types</option>
                     {types.map(type=> (
                         <option  key={type.id} value={type.id}>{type.title}</option>
                     ))}

@@ -138,3 +138,11 @@ div.stars {
     content: '\f006';
     font-family: FontAwesome;
   }
+
+  .arrow{
+    color: white;
+  }
+  .arrow:hover{
+    animation: rocking 2s infinite;
+    cursor: pointer;
+  }
