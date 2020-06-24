@@ -81,7 +81,7 @@ const MessageBoardCard = props => {
                 <div className="description">
                     {props.message.content}
                 </div>
-                {props.message.receiver_customer.user.id === Number(props.user_id)&& props.message.seen === false? (<div className="newMessage"><h3>New!</h3></div>) : ("")}
+                {props.message.receiver_customer.user.id === Number(props.user_id)&& props.message.seen === false? (<div className="newMessage"><h3 className="add-shine">New!</h3></div>) : ("")}
                 <div className="meta">{dateFunction(props.message.created_at)}</div>
                 </div>
             </div>
