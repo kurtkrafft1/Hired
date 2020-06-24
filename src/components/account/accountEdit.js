@@ -167,7 +167,7 @@ const EditAccount = props => {
                     </div>
                 </div>
                 <div className="edit-icon-account">
-                    < button disabled={isLoading} onClick={handleSubmit}>Submit</button>
+                    < button className="ui button" disabled={isLoading} onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
             </div>
