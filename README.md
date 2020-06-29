@@ -57,5 +57,19 @@ Hired is a simple hiring tool to find local day-laborers, here are some the feat
 1. Material UI 
 1. Semantic UI
 
+
+## LOGIN INFO
+1. if you would like to login with pre-made information here are some fake users
+* Email: j@j.com
+* Password: testword1
+
+* Email: sal@sal.com
+* Password: testword1
+
+* Email: kurt@krafft.com 
+* Password: testword1
+
+
+
 ## 
 Made by Kurt Krafft
